@@ -1,17 +1,45 @@
-let balance = 1000;
+let balance = 1500;
 
 // Update the current balance at page load
-document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
+refreshBalance();
+
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
-let highestWinPrice = 0; // Variable to store the highest bet win price
+let highestWinPrice = 0;
 
 // Create an audio element for the sound effect
 const soundEffect = new Audio('audio/cash-register-sound.mp3');
 const spinningEffect = new Audio('audio/spin.mp3');
 const loseEffect = new Audio('audio/losebet.mp3');
+
+// Add the "Highest Balance" div to the game history
+const historyContainer = document.getElementById('historyContainer');
+const highestBalanceDiv = document.createElement('div');
+highestBalanceDiv.id = 'highestBalance';
+highestBalanceDiv.innerHTML = `Highest Balance: <strong>$${highestBalance.toLocaleString()}</strong>`;
+historyContainer.appendChild(highestBalanceDiv);
+
+// Add the "Highest Win Price" div to the game history
+const highestWinPriceDiv = document.createElement('div');
+highestWinPriceDiv.id = 'highestWinPrice';
+highestWinPriceDiv.innerHTML = `Highest Win Price: <strong>$${highestWinPrice.toLocaleString()}</strong>`;
+historyContainer.appendChild(highestWinPriceDiv);
+
+// Add CSS to center the highest balance and highest win price divs
+highestBalanceDiv.style.display = 'flex';
+highestBalanceDiv.style.justifyContent = 'center';
+highestWinPriceDiv.style.display = 'flex';
+highestWinPriceDiv.style.justifyContent = 'center';
+
+function refreshBalance() {
+  document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💰`;
+}
+
+function refreshChosenBet() {
+  document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${chosenBet.toLocaleString()}</strong>`;
+}
 
 function chooseColor(color) {
   chosenColor = color;
@@ -31,7 +59,7 @@ function chooseBet(bet) {
   }
   chosenBet = bet;
   document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${bet.toLocaleString()}</strong>`;
-  document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
+  refreshBalance();
 }
 
 function doublePreviousBet() {
@@ -42,7 +70,7 @@ function doublePreviousBet() {
     return;
   }
   chosenBet = bet;
-  document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${chosenBet.toLocaleString()}</strong>`;
+  refreshChosenBet();
 }
 
 function play() {
@@ -59,7 +87,7 @@ function play() {
     return;
   }
   balance -= chosenBet;
-    document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
+  refreshBalance();
 
   // Disable the "Place Bet" button
   document.getElementById('placeBetButton').disabled = true;
@@ -97,8 +125,8 @@ function play() {
     updateHistory(result.color, previousBet, balance, winAmount, chosenColor);
 
     // Do not reset chosen color
-    document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
-    document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${chosenBet.toLocaleString()}</strong>`;
+    refreshBalance();
+    refreshChosenBet();
 
     if (balance > highestBalance) {
       highestBalance = balance; // Update the highest balance
@@ -118,7 +146,6 @@ function play() {
     document.getElementById('placeBetButton').style.backgroundColor = 'rgb(11, 186, 230)';
   });
 }
-
 
 function updateHistory(resultColor, bet, balance, winAmount, chosenColor) {
   const historyContainer = document.getElementById('historyContainer');
@@ -140,25 +167,6 @@ function updateHistory(resultColor, bet, balance, winAmount, chosenColor) {
   // Append the new history item
   historyContainer.appendChild(historyItem);
 }
-
-// Add the "Highest Balance" div to the game history
-const historyContainer = document.getElementById('historyContainer');
-const highestBalanceDiv = document.createElement('div');
-highestBalanceDiv.id = 'highestBalance';
-highestBalanceDiv.innerHTML = `Highest Balance: <strong>$${highestBalance.toLocaleString()}</strong>`;
-historyContainer.appendChild(highestBalanceDiv);
-
-// Add the "Highest Win Price" div to the game history
-const highestWinPriceDiv = document.createElement('div');
-highestWinPriceDiv.id = 'highestWinPrice';
-highestWinPriceDiv.innerHTML = `Highest Win Price: <strong>$${highestWinPrice.toLocaleString()}</strong>`;
-historyContainer.appendChild(highestWinPriceDiv);
-
-// Add CSS to center the highest balance and highest win price divs
-highestBalanceDiv.style.display = 'flex';
-highestBalanceDiv.style.justifyContent = 'center';
-highestWinPriceDiv.style.display = 'flex';
-highestWinPriceDiv.style.justifyContent = 'center';
 
 (function (loader) {
   document.addEventListener("DOMContentLoaded", loader[0], false);

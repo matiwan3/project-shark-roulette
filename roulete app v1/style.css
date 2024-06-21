@@ -5,8 +5,6 @@ body {
     background-image: url('img/background-image.png');
     background-size: cover;
     background-position: center;
-    
-
 }
 .main {
     flex: 1;
@@ -151,4 +149,27 @@ body {
 
 .color-beted.g {
   background-color: #43A047;
+}
+
+footer {
+  background-color: black;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+a {
+  color: red; /* Set the default link color */
+  text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+  color: red; /* Set the link color on hover */
+}
+
+a:visited {
+  color: red; /* Set the link color for visited links */
 }
