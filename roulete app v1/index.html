@@ -1,0 +1,52 @@
+<!-- To start the app run it with live server -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Roulette shark 🦈</title>
+</head>
+<body>
+    <div class="main">
+        <h1>Roulette shark 🦈</h1>
+        
+        <div>
+            <p>Choose a color:</p>
+            <button class="color-button" onclick="chooseColor('red')" style="background-color: red; color: white;">Red (x2)</button>
+            <button class="color-button" onclick="chooseColor('black')" style="background-color: black; color: white;">Black (x3)</button>
+            <button class="color-button" onclick="chooseColor('green')" style="background-color: green; color: white;">Green (x8)</button>
+        </div>
+        
+        <div>
+            <p>Choose a bet amount:</p>
+            <button class="bet-button" onclick="chooseBet(20)">Bet $20</button>
+            <button class="bet-button" onclick="chooseBet(50)">Bet $50</button>
+            <button class="bet-button" onclick="chooseBet(100)">Bet $100</button>
+            <button class="bet-button" onclick="chooseBet(Math.floor(balance * 0.1))">Bet 10% of balance</button>
+            <button class="bet-button" onclick="doublePreviousBet()">Double Previous Bet</button>
+        </div>
+        <p id="balance">Your current balance is <strong><span style="color: gold">$1000</span></span></strong></p>
+        <p id="chosenColor">Chosen color: None</p>
+        <p id="chosenBet">Chosen bet: <b>$0</b></p>
+
+        <button class="place-bet-button" id="placeBetButton" onclick="play()">Place Bet</button>
+
+        <div class="roulette">
+            <div class="roulette-container">
+              <div class="wrap">
+                <div class="controller"></div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="history">
+        <div>
+            <h2 style="text-align: center;">Game History</h2>
+            <div id="historyContainer"></div>
+        </div>
+        <div id="historyContainer"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
