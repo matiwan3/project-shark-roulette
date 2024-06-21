@@ -1,4 +1,7 @@
-let balance = 100000000000;
+let balance = 1000;
+
+// Update the current balance at page load
+document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
@@ -12,7 +15,13 @@ const loseEffect = new Audio('audio/losebet.mp3');
 
 function chooseColor(color) {
   chosenColor = color;
-  document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">${color}</strong>`;
+  if (chosenColor === 'green') {
+    document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">🟢</strong>`;
+  } else if (chosenColor === 'red') {
+  document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">🔴</strong>`;
+  } else if (chosenColor === 'black') { 
+    document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">⚫</strong>`;
+  }
 }
 
 function chooseBet(bet) {
@@ -22,6 +31,7 @@ function chooseBet(bet) {
   }
   chosenBet = bet;
   document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${bet.toLocaleString()}</strong>`;
+  document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
 }
 
 function doublePreviousBet() {
@@ -54,12 +64,13 @@ function play() {
 
     if (result.color === chosenColor) {
       if (chosenColor === 'green') {
-        winAmount = chosenBet * 8;
+        winAmount = chosenBet * 33;
       } else if (chosenColor === 'red') {
         winAmount = chosenBet * 2;
       } else {
-        winAmount = chosenBet * 3;
+        winAmount = chosenBet * 2.5;
       }
+
       balance += winAmount;
       resultText += ` <span class="win-text" style="color: ${result.color}">You win!</span>`;
       // Play the sound effect when winning
@@ -72,7 +83,6 @@ function play() {
       }
     } else {
       loseEffect.play();
-      balance -= chosenBet;
       resultText += ' You lose!';
     }
 
@@ -207,12 +217,14 @@ highestWinPriceDiv.style.justifyContent = 'center';
   }
 
   function spin() {
+    balance -= chosenBet;
+    document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
     return new Promise((resolve, reject) => {
       let color;
       let r = rand(1, 1000);
-      if (1 <= r && r < 30) color = "green";
-      else if (30 <= r && r < 530) color = "red";
-      else if (530 <= r && r < 1000) color = "black";
+      if (1 <= r && r < 30) color = "green"; // 1-29 / 1000 => 3% chance of winning
+      else if (30 <= r && r < 530) color = "red"; // 30-529 / 1000 => 50% chance of winning
+      else if (530 <= r && r < 1000) color = "black"; // 530-999 / 1000 => 47% chance of winning
       let bet = bets[color][rand(0, bets[color].length)];
       spin_promise(color, bet).then(() => {
         console.log("[Spin ended]");
