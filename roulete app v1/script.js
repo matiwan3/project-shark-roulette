@@ -54,6 +54,12 @@ function play() {
     alert('Please choose a color.');
     return;
   }
+  if (balance < chosenBet) {
+    alert('You do not have enough balance for this bet.');
+    return;
+  }
+  balance -= chosenBet;
+    document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
 
   // Disable the "Place Bet" button
   document.getElementById('placeBetButton').disabled = true;
@@ -217,8 +223,6 @@ highestWinPriceDiv.style.justifyContent = 'center';
   }
 
   function spin() {
-    balance -= chosenBet;
-    document.getElementById('balance').innerHTML = `Your current balance is <strong><span style="color: gold">$${balance.toLocaleString()}</span></strong> 💸`;
     return new Promise((resolve, reject) => {
       let color;
       let r = rand(1, 1000);
