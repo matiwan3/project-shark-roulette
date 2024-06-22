@@ -5,52 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/roulette.css">
-    <link rel="shortcut icon" href="favicon.png" type="x-icon"/>
+    <link rel="shortcut icon" href="img/favicon.png" type="x-icon"/>
     <title>Roulette shark 🦈</title>
 </head>
 <body>
     <div id="unsupported-device-message">Sorry, the game isn't supported for this device 🦈</div>
-    <div class="main">
-        <h1>Roulette shark 🦈</h1>
-
-        <div>
-            <p>Choose a color:</p>
-            <button class="color-button" onclick="chooseColor('red')" style="background-color: red; color: white;">Red (x2)</button>
-            <button class="color-button" onclick="chooseColor('black')" style="background-color: black; color: white;">Black (x2,5)</button>
-            <button class="color-button" onclick="chooseColor('green')" style="background-color: green; color: white;">Green (x33)</button>
-        </div>
-        
-        <div>
-            <p>Choose a bet amount:</p>
-            <button class="bet-button" onclick="chooseBet(50)">Bet $50</button>
-            <button class="bet-button" onclick="chooseBet(100)">Bet $100</button>
-            <button class="bet-button" onclick="chooseBet(Math.floor(balance * 0.1))">Bet 10% of balance</button>
-            <button class="bet-button" onclick="doublePreviousBet()">Double Previous Bet</button>
-            <button class="bet-button" onclick="chooseBet(balance)">All in</button>
-        </div>
-        <p id="balance">Your current balance is <strong><span style="color: gold"></span></span></strong></p>
-        <p id="chosenColor">Chosen color: None</p>
-        <p id="chosenBet">Chosen bet: <b>$0</b></p>
-
-        <button class="place-bet-button" id="placeBetButton" onclick="play()">Place Bet</button>
-
-        <div class="roulette">
-            <div class="roulette-container">
-              <div class="wrap">
-                <div class="controller"></div>
-              </div>
+    <div class="container">
+        <div class="top-sesction">
+            <div class="section1">
+                <div class="main">
+                    <h1>Roulette shark 🦈</h1>
+            
+                    <div>
+                        <p>Choose a color:</p>
+                        <button class="color-button" onclick="chooseColor('red')" style="background-color: red; color: white;">Red (x2)</button>
+                        <button class="color-button" onclick="chooseColor('black')" style="background-color: black; color: white;">Black (x2,5)</button>
+                        <button class="color-button" onclick="chooseColor('green')" style="background-color: green; color: white;">Green (x33)</button>
+                    </div>
+                    
+                    <div>
+                        <p>Choose a bet amount:</p>
+                        <button class="bet-button" onclick="chooseBet(50)">Bet $50</button>
+                        <button class="bet-button" onclick="chooseBet(100)">Bet $100</button>
+                        <button class="bet-button" onclick="chooseBet(Math.floor(balance * 0.1))">Bet 10% of balance</button>
+                        <button class="bet-button" onclick="doublePreviousBet()">Double Previous Bet</button>
+                        <button class="bet-button" onclick="chooseBet(balance)">All in</button>
+                    </div>
+                    <p id="balance">Your current balance is <strong><span style="color: gold"></span></span></strong></p>
+                    <p id="chosenColor">Chosen color: None</p>
+                    <p id="chosenBet">Chosen bet: <b>$0</b></p>
+            
+                    <button class="place-bet-button" id="placeBetButton" onclick="play()">Place Bet</button>
+            
+                    <div class="roulette">
+                        <div class="roulette-container">
+                            <div class="wrap">
+                            <div class="controller"></div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+                <div class="history">
+                    <div>
+                        <h2 style="text-align: center;">Game History</h2>
+                        <div id="historyContainer"></div>
+                    </div>
+                    <div id="historyContainer"></div>
+                </div>
             </div>
-          </div>
-    </div>
-    <div class="history">
-        <div>
-            <h2 style="text-align: center;">Game History</h2>
-            <div id="historyContainer"></div>
+            <div class="section2">
+                <div id="ranking">
+                    <h2 style="text-align: center;">Ranking</h2>
+                    <table id="rankingTable">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Balance</th>
+                        </tr>
+                        <tr>
+                            <td id="rank1">1</td>
+                            <td id="username1">-</td>
+                            <td id="balance1">-</td>
+                        </tr>
+                        <tr>
+                            <td id="rank2">2</td>
+                            <td id="username2">-</td>
+                            <td id="balance2">-</td>
+                        </tr>
+                        <tr>
+                            <td id="rank3">3</td>
+                            <td id="username3">-</td>
+                            <td id="balance3">-</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div id="historyContainer"></div>
     </div>
     <footer>
-        <p style="color: white;"><strong>Ratios: </strong> | Red: 50% | Black 47% | Green 3% | Version: 1.2.1</p>
+        <p style="color: white;"><strong>Ratios: </strong> | Red: 50% | Black 47% | Green 3% | Version: 1.2.2</p>
         <p style="color: white;">Created by <a href="https://www.youtube.com/@SuperrrGoat" target="_blank">SuperGoat</a> aka <a href="https://github.com/matiwan3/project-shark-roulette" target="_blank">matiwan3</a></p> 
     </footer>
     <script src="script.js"></script>

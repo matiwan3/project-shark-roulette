@@ -1,15 +1,62 @@
 body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 20px;
-    display: flex;
-    background-image: url('../img/background-image.png');
-    background-size: cover;
-    background-position: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  background-color: black;
 }
+
+.container {
+  background-image: url('../img/background-image.png');
+  width: 100%;
+}
+.top-sections {
+  display: flex;
+  width: 100%;
+  
+}
+.main, .history {
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .main {
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  width: 40%;
 }
+
+.history {
+  flex: 1;
+  background-image: url('../img/background-history.png');
+}
+.section1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+}
+.section2 {
+  margin-bottom: 340px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  text-align: center;
+}
+#ranking {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  flex-direction: column;
+  text-align: center;
+}
+
 #balance, #result, #chosenColor, #chosenBet {
     font-size: 20px;
     margin: 10px;
@@ -19,16 +66,6 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     background-color: rgb(11, 186, 230)
-}
-.history {
-    width: 2vh;
-    flex: 1;
-    margin-left: 20px;
-    text-align: left;
-    border: solid black 1px;
-    background-image: url('../img/background-history.png');
-    background-size: cover;
-    border-radius: 30px;
 }
 .history p {
     margin: 0;
@@ -78,11 +115,11 @@ body {
 }
 footer {
   background-color: black;
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 20px;
+  /* padding: 20px; */
   text-align: center;
 }
 a {
