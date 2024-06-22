@@ -58,7 +58,7 @@ function chooseBet(bet) {
     return;
   }
   chosenBet = bet;
-  document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${bet.toLocaleString()}</strong>`;
+  refreshChosenBet();
   refreshBalance();
 }
 
