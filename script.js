@@ -134,7 +134,6 @@ function play() {
     }
 
     if (balance <= 0) {
-      alert('You have run out of money. Game over.');
       refreshBalance();
       document.querySelector('button').disabled = true;
     }
