@@ -22,11 +22,11 @@
         
         <div>
             <p>Choose a bet amount:</p>
-            <button class="bet-button" onclick="chooseBet(20)">Bet $20</button>
             <button class="bet-button" onclick="chooseBet(50)">Bet $50</button>
             <button class="bet-button" onclick="chooseBet(100)">Bet $100</button>
             <button class="bet-button" onclick="chooseBet(Math.floor(balance * 0.1))">Bet 10% of balance</button>
             <button class="bet-button" onclick="doublePreviousBet()">Double Previous Bet</button>
+            <button class="bet-button" onclick="chooseBet(balance)">All in</button>
         </div>
         <p id="balance">Your current balance is <strong><span style="color: gold"></span></span></strong></p>
         <p id="chosenColor">Chosen color: None</p>
@@ -50,7 +50,7 @@
         <div id="historyContainer"></div>
     </div>
     <footer>
-        <p style="color: white;"><strong>Ratios: </strong> | Red: 50% | Black 47% | Green 3% | Version: 1.2-alpha</p>
+        <p style="color: white;"><strong>Ratios: </strong> | Red: 50% | Black 47% | Green 3% | Version: 1.2.1</p>
         <p style="color: white;">Created by <a href="https://www.youtube.com/@SuperrrGoat" target="_blank">SuperGoat</a> aka <a href="https://github.com/matiwan3/project-shark-roulette" target="_blank">matiwan3</a></p> 
     </footer>
     <script src="script.js"></script>

@@ -135,7 +135,7 @@ function play() {
 
     if (balance <= 0) {
       alert('You have run out of money. Game over.');
-      document.getElementById('balance').innerHTML = 'Your current balance is <strong>$0<strong>.';
+      refreshBalance();
       document.querySelector('button').disabled = true;
     }
   }).catch(error => {
