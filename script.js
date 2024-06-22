@@ -161,7 +161,7 @@ function updateHistory(resultColor, bet, balance, winAmount, chosenColor) {
   historyItem.className = 'history-item';
   historyItem.innerHTML = `
     <div class="history-ball" style="background-color: ${resultColor}"></div>
-    <p>Bet: $${bet.toLocaleString()} | Won: $${winAmount.toLocaleString()} | Balance: <strong style="color: ${resultColor === chosenColor ? 'green' : 'red'}">${balance > 0 ? '$' + balance.toLocaleString() : '<span style="color: red">-$' + Math.abs(balance).toLocaleString() + '</span>'}</strong></p>
+    <p>Bet: $${bet.toLocaleString()} | Won: $${winAmount.toLocaleString()} | Balance: <strong style="color: ${resultColor === chosenColor ? 'green' : 'red'}">${balance > 0 ? '$' + balance.toLocaleString() : '<span style="color: red">$' + Math.abs(balance).toLocaleString() + '</span>'}</strong></p>
   `;
 
   // Append the new history item
