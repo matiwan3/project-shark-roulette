@@ -12,15 +12,15 @@ const port = 3000;
 const networkInterfaces = os.networkInterfaces();
 const localIP = networkInterfaces['Ethernet'][1].address;
 const appUri = `http://${localIP}:${port}`;
-const currentDate = new Date();
-const year = currentDate.getFullYear();
-const month = currentDate.getMonth();
-const day = currentDate.getDate();
-const hour = currentDate.getHours();
-const minute = currentDate.getMinutes();
-const second = currentDate.getSeconds();
+let currentDate = new Date();
 
-let dateTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+let dateTime = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+
+app.use((req, res, next) => {
+  const currentDate = new Date();
+  dateTime = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+  next();
+});
 
 // MongoDB setup
 const client = new MongoClient(login_user, { useNewUrlParser: true, useUnifiedTopology: true });
