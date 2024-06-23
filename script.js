@@ -1,6 +1,19 @@
-import updateRanking from "./db-connector";
-console.log(updateRanking);
+import DbClient from './DbClient.js';
+const dbClient = new DbClient('ranking.db');
+
 let balance = 1500;
+let username = prompt("Please enter your username:");
+if (!username) {
+  location.reload();
+}
+
+dbClient.updateRanking(username, balance, (err, rows) => {
+    if (err) {
+        console.error('Error updating ranking:', err.message);
+        return;
+    }
+    console.log('Updated ranking:', rows);
+});
 
 // Update the current balance at page load
 refreshBalance();
@@ -252,41 +265,3 @@ function updateHistory(resultColor, bet, balance, winAmount, chosenColor) {
   // Expose the spin function to the global scope so it can be triggered manually
   window.spin = spin;
 }]);
-
-// document.addEventListener('DOMContentLoaded', (event) => {
-//   let username = prompt("Please enter your username:");
-//   let rankings = JSON.parse(localStorage.getItem("rankings")) || [];
-
-//   function updateRankings(newScore) {
-//       let existingUserIndex = rankings.findIndex(rank => rank.username === username);
-//       if (existingUserIndex !== -1) {
-//           if (rankings[existingUserIndex].balance < newScore) {
-//               rankings[existingUserIndex].balance = newScore;
-//           }
-//       } else {
-//           rankings.push({ username, balance: newScore });
-//       }
-
-//       rankings.sort((a, b) => b.balance - a.balance);
-//       rankings = rankings.slice(0, 3); // Keep only top 3
-//       localStorage.setItem("rankings", JSON.stringify(rankings));
-//       displayRankings();
-//   }
-
-//   function displayRankings() {
-//       const rankingElement = document.getElementById("rankingContainer");
-//       rankingElement.innerHTML = ""; // Clear existing rankings
-//       rankings.forEach(rank => {
-//           const rankEntry = document.createElement("div");
-//           rankEntry.textContent = `${rank.username}: $${rank.balance}`;
-//           rankingElement.appendChild(rankEntry);
-//       });
-//   }
-
-//   // Example function to simulate updating balance
-//   function simulateGameEnd(newBalance) {
-//       updateRankings(newBalance);
-//   }
-
-//   displayRankings();
-// });
