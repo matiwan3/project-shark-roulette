@@ -15,21 +15,22 @@
             <div class="section1">
                 <div class="main">
                     <h1>Roulette shark 🦈</h1>
+                    <div id="username">Playing as: </div>
 
                     <div>
                         <p>Choose a color:</p>
-                        <button class="color-button" onclick="chooseColor('red')" style="background-color: red; color: white;">Red (x2)</button>
-                        <button class="color-button" onclick="chooseColor('black')" style="background-color: black; color: white;">Black (x2,5)</button>
-                        <button class="color-button" onclick="chooseColor('green')" style="background-color: green; color: white;">Green (x33)</button>
+                        <button id="btn-red" class="color-button" onclick="chooseColor('red')" style="background-color: red; color: white;">Red (x2)</button>
+                        <button id="btn-black" class="color-button" onclick="chooseColor('black')" style="background-color: black; color: white;">Black (x2,5)</button>
+                        <button id="btn-green" class="color-button" onclick="chooseColor('green')" style="background-color: green; color: white;">Green (x33)</button>
                     </div>
 
                     <div>
                         <p>Choose a bet amount:</p>
-                        <button class="bet-button" onclick="chooseBet(50)">Bet $50</button>
-                        <button class="bet-button" onclick="chooseBet(100)">Bet $100</button>
-                        <button class="bet-button" onclick="chooseBet(Math.floor(balance * 0.1))">Bet 10% of balance</button>
-                        <button class="bet-button" onclick="doublePreviousBet()">Double Previous Bet</button>
-                        <button class="bet-button" onclick="chooseBet(balance)">All in</button>
+                        <button id="btn-bet50" class="bet-button" onclick="chooseBet(50)">Bet $50</button>
+                        <button id="btn-bet100" class="bet-button" onclick="chooseBet(100)">Bet $100</button>
+                        <button id="btn-bet10%" class="bet-button" onclick="chooseBet(Math.floor(balance * 0.1))">Bet 10% of balance</button>
+                        <button id="btn-doublebet" class="bet-button" onclick="doublePreviousBet()">Double Previous Bet</button>
+                        <button id="btn-allin" class="bet-button" onclick="chooseBet(balance)">All in</button>
                     </div>
                     <p id="balance">Your current balance is <strong><span style="color: gold"></span></span></strong></p>
                     <p id="chosenColor">Chosen color: None</p>

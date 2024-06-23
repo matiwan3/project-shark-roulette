@@ -1,20 +1,31 @@
-let balance = 1500;
+let balance = 1000;
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
 let highestWinPrice = 0;
-const session_username = prompt("Please enter your username:");
+let session_username = prompt("Please enter your username:");
 if (!session_username) {
-  location.reload();
+  session_username = generateRandomUsername();
+}
+
+function generateRandomUsername() {
+  const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let randomPassword = '';
+  for (let i = 0; i < 10; i++) {
+    randomPassword += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return randomPassword;
 }
 
 // Update the current balance at page load
+const usernameElement = document.getElementById('username');
+usernameElement.innerHTML = `Playing as: <strong> ${session_username}</strong>`;
 refreshBalance();
 
 const updateRanking = async (session_username, score) => {
   try {
-    const response = await fetch('http://localhost:3000/update-ranking', {
+    const response = await fetch('http://192.168.1.16:3000/update-ranking', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: session_username, score: score })
@@ -28,8 +39,8 @@ const updateRanking = async (session_username, score) => {
       const usernameElement = document.getElementById(`username${i + 1}`);
       const balanceElement = document.getElementById(`balance${i + 1}`);
 
-      rankElement.textContent = rankings[i].id;
-      usernameElement.textContent = rankings[i].name;
+      rankElement.textContent = i+1;
+      usernameElement.innerHTML = rankings[i].name;
       balanceElement.textContent = rankings[i].score;
     }
   } catch (err) {
@@ -71,6 +82,22 @@ function refreshChosenBet() {
   document.getElementById('chosenBet').innerHTML = `Chosen bet: <strong>$${chosenBet.toLocaleString()}</strong>`;
 }
 
+function buttonsDisabled(flag = true) {
+  document.getElementById('placeBetButton').disabled = flag;
+  if (flag) {
+  document.getElementById('placeBetButton').style.backgroundColor = 'gray';
+  } else {
+    document.getElementById('placeBetButton').style.backgroundColor = 'rgb(11, 186, 230)';
+  }
+  document.getElementById('btn-bet50').disabled = flag;
+  document.getElementById('btn-bet100').disabled = flag;
+  document.getElementById('btn-bet10%').disabled = flag;
+  document.getElementById('btn-doublebet').disabled = flag;
+  document.getElementById('btn-allin').disabled = flag;
+  document.getElementById('btn-red').disabled = flag;
+  document.getElementById('btn-black').disabled = flag;
+  document.getElementById('btn-red').disabled = flag;
+}
 function chooseColor(color) {
   chosenColor = color;
   if (chosenColor === 'green') {
@@ -83,6 +110,11 @@ function chooseColor(color) {
 }
 
 function chooseBet(bet) {
+  console.log('balance', balance)
+  if (balance == 0) {
+    console.log('reloading the page');
+    location.reload();
+  }
   if (bet > balance) {
     alert('You do not have enough balance for this bet.');
     return;
@@ -104,6 +136,10 @@ function doublePreviousBet() {
 }
 
 function play() {
+  if (balance === 0) {
+    location.reload();
+    return;
+  }
   if (chosenBet === 0) {
     alert('Please choose a bet amount.');
     return;
@@ -112,16 +148,13 @@ function play() {
     alert('Please choose a color.');
     return;
   }
-  if (balance < chosenBet) {
-    alert('You do not have enough balance for this bet.');
-    return;
-  }
+
   balance -= chosenBet;
   refreshBalance();
 
-  // Disable the "Place Bet" button
-  document.getElementById('placeBetButton').disabled = true;
-  document.getElementById('placeBetButton').style.backgroundColor = 'gray';
+  // Disable all buttons
+  buttonsDisabled(true);
+
   spin().then(result => {
     let resultText = `The ball landed on ${result.color} ${result.number}.`;
     let winAmount = 0;
@@ -171,9 +204,8 @@ function play() {
   }).finally(() => {
     // Update the ranking
     updateRanking(session_username, balance);
-    // Enable the "Place Bet" button
-    document.getElementById('placeBetButton').disabled = false;
-    document.getElementById('placeBetButton').style.backgroundColor = 'rgb(11, 186, 230)';
+    // Enable all buttons
+    buttonsDisabled(false);
   });
 }
 
