@@ -1,4 +1,4 @@
-## Hosting this version on raspberryPi
+## Hosting server-side version on raspberryPi
 1. connect via ssh
 2. ```sudo apt install nodejs```  
 3. ```sudo apt install npm``` 
