@@ -30,7 +30,7 @@ const updateRanking = async (session_username, score) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: session_username, score: score })
     });
-    
+
     const rankings = await response.json();
 
     // Update the ranking table in index.html
@@ -39,7 +39,7 @@ const updateRanking = async (session_username, score) => {
       const usernameElement = document.getElementById(`username${i + 1}`);
       const balanceElement = document.getElementById(`balance${i + 1}`);
 
-      rankElement.textContent = i+1;
+      rankElement.textContent = i + 1;
       usernameElement.innerHTML = rankings[i].name;
       balanceElement.textContent = rankings[i].score;
     }
@@ -85,7 +85,7 @@ function refreshChosenBet() {
 function buttonsDisabled(flag = true) {
   document.getElementById('placeBetButton').disabled = flag;
   if (flag) {
-  document.getElementById('placeBetButton').style.backgroundColor = 'gray';
+    document.getElementById('placeBetButton').style.backgroundColor = 'gray';
   } else {
     document.getElementById('placeBetButton').style.backgroundColor = 'rgb(11, 186, 230)';
   }
@@ -103,8 +103,8 @@ function chooseColor(color) {
   if (chosenColor === 'green') {
     document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">🟢</strong>`;
   } else if (chosenColor === 'red') {
-  document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">🔴</strong>`;
-  } else if (chosenColor === 'black') { 
+    document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">🔴</strong>`;
+  } else if (chosenColor === 'black') {
     document.getElementById('chosenColor').innerHTML = `Chosen color: <strong style="color: ${color}">⚫</strong>`;
   }
 }

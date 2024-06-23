@@ -1,3 +1,4 @@
+// Creds are stored in a separate file for security reasons and are gitignored
 const { login_user } = require('../creds');
 const express = require('express');
 const mongoose = require('mongoose');
