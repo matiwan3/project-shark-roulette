@@ -12,6 +12,15 @@ const port = 3000;
 const networkInterfaces = os.networkInterfaces();
 const localIP = networkInterfaces['Ethernet'][1].address;
 const appUri = `http://${localIP}:${port}`;
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth();
+const day = currentDate.getDate();
+const hour = currentDate.getHours();
+const minute = currentDate.getMinutes();
+const second = currentDate.getSeconds();
+
+let dateTime = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 
 // MongoDB setup
 const client = new MongoClient(login_user, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -21,11 +30,11 @@ app.use(express.json());
 
 app.post('/update-ranking', async (req, res) => {
   const { username, score } = req.body;
-  console.log(`[MongoDB] Captured following data: ${username}, ${score}`);
+  console.log(`[MongoDB at ${dateTime}] Captured following data: ${username}, ${score}`);
 
   try {
     await client.connect();
-    console.log('[MongoDB] Updating session started');
+    console.log(`[MongoDB at ${dateTime}] Updating session started`);
     const db = client.db('ranking');
     const collection = db.collection('1500');
 
@@ -53,16 +62,16 @@ app.post('/update-ranking', async (req, res) => {
       _id: { $nin: topScores.map(record => record._id) }
     });
 
-    console.log('[MongoDB] Updating session completed');
+    console.log(`[MongoDB at ${dateTime}] Updating session completed`);
     res.json(topScores);
   } catch (err) {
-    console.error('[MongoDB] Error updating ranking:', err);
-    res.status(500).send('[MongoDB] Internal Server Error');
+    console.error(`[MongoDB at ${dateTime}] Error updating ranking:`, err);
+    res.status(500).send(`[MongoDB at ${dateTime}] Internal Server Error`);
   } finally {
     await client.close();
   }
 });
 
 app.listen(port, () => {
-  console.log(`Running app at: ${appUri}`);
+  console.log(`[SERVER at ${dateTime}] Running app at: ${appUri}`);
 });

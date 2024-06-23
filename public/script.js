@@ -148,7 +148,11 @@ function play() {
     alert('Please choose a color.');
     return;
   }
-
+  if (chosenBet > balance) {
+    alert('You do not have enough balance for this bet.');
+    return;
+  }
+  
   balance -= chosenBet;
   refreshBalance();
 
