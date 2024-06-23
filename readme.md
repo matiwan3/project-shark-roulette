@@ -1,4 +1,4 @@
-## Hosting server-side version on raspberryPi
+## Hosting [server-side version](https://github.com/matiwan3/project-shark-roulette/blob/feature/server-side/readme.md) on raspberryPi
 1. connect via ssh
 2. ```sudo apt install nodejs```  
 3. ```sudo apt install npm``` 
