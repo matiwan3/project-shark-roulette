@@ -4,38 +4,9 @@ let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
 let highestWinPrice = 0;
-const session_username = prompt("Please enter your username:");
-if (!session_username) {
-  location.reload();
-}
 
 // Update the current balance at page load
 refreshBalance();
-
-const updateRanking = async (session_username, score) => {
-  try {
-    const response = await fetch('http://localhost:3000/update-ranking', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: session_username, score: score })
-    });
-    
-    const rankings = await response.json();
-
-    // Update the ranking table in index.html
-    for (let i = 0; i < rankings.length; i++) {
-      const rankElement = document.getElementById(`rank${i + 1}`);
-      const usernameElement = document.getElementById(`username${i + 1}`);
-      const balanceElement = document.getElementById(`balance${i + 1}`);
-
-      rankElement.textContent = rankings[i].id;
-      usernameElement.textContent = rankings[i].name;
-      balanceElement.textContent = rankings[i].score;
-    }
-  } catch (err) {
-    console.error('Error updating ranking:', err);
-  }
-};
 
 updateRanking(session_username, balance);
 
@@ -170,7 +141,6 @@ function play() {
     console.error(error);
   }).finally(() => {
     // Update the ranking
-    updateRanking(session_username, balance);
     // Enable the "Place Bet" button
     document.getElementById('placeBetButton').disabled = false;
     document.getElementById('placeBetButton').style.backgroundColor = 'rgb(11, 186, 230)';
