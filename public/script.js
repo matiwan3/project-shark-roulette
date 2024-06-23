@@ -1,33 +1,48 @@
-import DbClient from './DbClient.js';
-const dbClient = new DbClient('ranking.db');
-
 let balance = 1500;
-let username = prompt("Please enter your username:");
-if (!username) {
-  location.reload();
-}
-
-dbClient.updateRanking(username, balance, (err, rows) => {
-    if (err) {
-        console.error('Error updating ranking:', err.message);
-        return;
-    }
-    console.log('Updated ranking:', rows);
-});
-
-// Update the current balance at page load
-refreshBalance();
-
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
 let highestWinPrice = 0;
+const session_username = prompt("Please enter your username:");
+if (!session_username) {
+  location.reload();
+}
+
+// Update the current balance at page load
+refreshBalance();
+
+const updateRanking = async (session_username, score) => {
+  try {
+    const response = await fetch('http://localhost:3000/update-ranking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: session_username, score: score })
+    });
+    
+    const rankings = await response.json();
+
+    // Update the ranking table in index.html
+    for (let i = 0; i < rankings.length; i++) {
+      const rankElement = document.getElementById(`rank${i + 1}`);
+      const usernameElement = document.getElementById(`username${i + 1}`);
+      const balanceElement = document.getElementById(`balance${i + 1}`);
+
+      rankElement.textContent = rankings[i].id;
+      usernameElement.textContent = rankings[i].name;
+      balanceElement.textContent = rankings[i].score;
+    }
+  } catch (err) {
+    console.error('Error updating ranking:', err);
+  }
+};
+
+updateRanking(session_username, balance);
 
 // Create an audio element for the sound effect
-const soundEffect = new Audio('audio/cash-register-sound.mp3');
-const spinningEffect = new Audio('audio/spin.mp3');
-const loseEffect = new Audio('audio/losebet.mp3');
+const soundEffect = new Audio('../audio/cash-register-sound.mp3');
+const spinningEffect = new Audio('../audio/spin.mp3');
+const loseEffect = new Audio("../audio/losebet.mp3");
 
 // Add the "Highest Balance" div to the game history
 const historyContainer = document.getElementById('historyContainer');
@@ -136,15 +151,13 @@ function play() {
     }
 
     previousBet = chosenBet;
-    // chosenBet = 0;
     updateHistory(result.color, previousBet, balance, winAmount, chosenColor);
 
-    // Do not reset chosen color
     refreshBalance();
     refreshChosenBet();
 
     if (balance > highestBalance) {
-      highestBalance = balance; // Update the highest balance
+      highestBalance = balance;
       document.getElementById('highestBalance').innerHTML = `Highest Balance: <strong>$${highestBalance.toLocaleString()}</strong>`;
     }
 
@@ -152,9 +165,12 @@ function play() {
       refreshBalance();
       document.querySelector('button').disabled = true;
     }
+
   }).catch(error => {
     console.error(error);
   }).finally(() => {
+    // Update the ranking
+    updateRanking(session_username, balance);
     // Enable the "Place Bet" button
     document.getElementById('placeBetButton').disabled = false;
     document.getElementById('placeBetButton').style.backgroundColor = 'rgb(11, 186, 230)';
@@ -254,7 +270,6 @@ function updateHistory(resultColor, bet, balance, winAmount, chosenColor) {
       let bet = bets[color][rand(0, bets[color].length)];
       spin_promise(color, bet).then(() => {
         console.log("[Spin ended]");
-
         resolve({ color: color, number: bet });
       }).catch((error) => {
         reject(error);

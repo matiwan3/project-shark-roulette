@@ -1,20 +1,15 @@
 const mongoose = require('mongoose');
 
 const rankingSchema = new mongoose.Schema({
-  playerName: {
+  name: {
     type: String,
+    unique: true, // Ensure usernames are unique
     required: true
   },
   score: {
     type: Number,
     required: true
-  },
-  timestamp: {
-    type: Date,
-    default: Date.now
   }
 });
 
-const Ranking = mongoose.model('Ranking', rankingSchema, 'ranks');
-
-module.exports = Ranking;
+module.exports = mongoose.model('Ranking', rankingSchema);
