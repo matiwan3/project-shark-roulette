@@ -8,8 +8,6 @@ let highestWinPrice = 0;
 // Update the current balance at page load
 refreshBalance();
 
-updateRanking(session_username, balance);
-
 // Create an audio element for the sound effect
 const soundEffect = new Audio('../audio/cash-register-sound.mp3');
 const spinningEffect = new Audio('../audio/spin.mp3');
