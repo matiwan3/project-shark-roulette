@@ -9,9 +9,9 @@ let highestWinPrice = 0;
 refreshBalance();
 
 // Create an audio element for the sound effect
-const soundEffect = new Audio('../audio/cash-register-sound.mp3');
-const spinningEffect = new Audio('../audio/spin.mp3');
-const loseEffect = new Audio("../audio/losebet.mp3");
+const soundEffect = new Audio('audio/cash-register-sound.mp3');
+const spinningEffect = new Audio('audio/spin.mp3');
+const loseEffect = new Audio("audio/losebet.mp3");
 
 // Add the "Highest Balance" div to the game history
 const historyContainer = document.getElementById('historyContainer');
