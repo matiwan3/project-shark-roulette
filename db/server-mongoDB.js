@@ -54,10 +54,10 @@ app.post('/update-ranking', async (req, res) => {
       await collection.insertOne({ name: username, score: score });
     }
 
-    // Get the top 3 scores sorted in descending order
-    const topScores = await collection.find({}).sort({ score: -1 }).limit(3).toArray();
+    // Get the top 10 scores sorted in descending order
+    const topScores = await collection.find({}).sort({ score: -1 }).limit(10).toArray();
 
-    // Delete records that are not in the top 3
+    // Delete records that are not in the top 10
     await collection.deleteMany({
       _id: { $nin: topScores.map(record => record._id) }
     });

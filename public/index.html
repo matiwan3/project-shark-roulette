@@ -66,37 +66,42 @@
                 <div id="ranking">
                     <h2 style="text-align: center;">Ranking</h2>
                     <table id="rankingTable">
-                        <tr>
-                            <th>Rank</th>
-                            <th>Username</th>
-                            <th>Balance</th>
-                        </tr>
-                        <tr>
-                            <td id="rank1">1</td>
-                            <td id="username1">-</td>
-                            <td id="balance1">-</td>
-                        </tr>
-                        <tr>
-                            <td id="rank2">2</td>
-                            <td id="username2">-</td>
-                            <td id="balance2">-</td>
-                        </tr>
-                        <tr>
-                            <td id="rank3">3</td>
-                            <td id="username3">-</td>
-                            <td id="balance3">-</td>
-                        </tr>
+                        <script>
+                            const rankingTable = document.getElementById("rankingTable");
+                            const rankingData = [
+                                { rank: 1, username: "-", balance: "-" },
+                                { rank: 2, username: "-", balance: "-" },
+                                { rank: 3, username: "-", balance: "-" },
+                                { rank: 4, username: "-", balance: "-" },
+                                { rank: 5, username: "-", balance: "-" },
+                                { rank: 6, username: "-", balance: "-" },
+                                { rank: 7, username: "-", balance: "-" },
+                                { rank: 8, username: "-", balance: "-" },
+                                { rank: 9, username: "-", balance: "-" },
+                                { rank: 10, username: "-", balance: "-" }
+                            ];
+                    
+                            rankingData.forEach(data => {
+                                const row = document.createElement("tr");
+                                row.innerHTML = `
+                                    <td id="rank${data.rank}">${data.rank}</td>
+                                    <td id="username${data.rank}">${data.username}</td>
+                                    <td id="balance${data.rank}">${data.balance}</td>
+                                `;
+                                rankingTable.appendChild(row);
+                            });
+                        </script>
                     </table>
                 </div>
             </div>
+            <footer>
+                <p style="color: white;"><strong>Ratios: </strong> | Red: 50% | Black 47% | Green 3% | Version: 1.2.2</p>
+                <p style="color: white;">Created by <a href="https://www.youtube.com/@SuperrrGoat" target="_blank">SuperGoat</a>
+                    aka <a href="https://github.com/matiwan3/project-shark-roulette" target="_blank">matiwan3</a></p>
+            </footer>
         </div>
     </div>
-    <footer>
-        <p style="color: white;"><strong>Ratios: </strong> | Red: 50% | Black 47% | Green 3% | Version: 1.2.2</p>
-        <p style="color: white;">Created by <a href="https://www.youtube.com/@SuperrrGoat" target="_blank">SuperGoat</a>
-            aka <a href="https://github.com/matiwan3/project-shark-roulette" target="_blank">matiwan3</a></p>
-    </footer>
+
     <script src="script.js"></script>
 </body>
-
 </html>
