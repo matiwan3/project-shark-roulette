@@ -1,9 +1,16 @@
+// Create an audio element for the sound effect
+const soundEffect = new Audio('../audio/cash-register-sound.mp3');
+const spinningEffect = new Audio('../audio/spin.mp3');
+const loseEffect = new Audio("../audio/losebet.mp3");
+
+// Initialize the game variables
 let balance = 1000;
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
 let highestWinPrice = 0;
+
 let session_username = prompt("Please enter your username:");
 if (!session_username) {
   session_username = generateRandomUsername();
@@ -49,11 +56,6 @@ const updateRanking = async (session_username, score) => {
 };
 
 updateRanking(session_username, balance);
-
-// Create an audio element for the sound effect
-const soundEffect = new Audio('../audio/cash-register-sound.mp3');
-const spinningEffect = new Audio('../audio/spin.mp3');
-const loseEffect = new Audio("../audio/losebet.mp3");
 
 // Add the "Highest Balance" div to the game history
 const historyContainer = document.getElementById('historyContainer');
