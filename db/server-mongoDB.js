@@ -1,7 +1,7 @@
 // Author: SuperGoat aka matiwan3 
 // To run simply use `node server.js`
 const express = require('express');
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const cors = require('cors');
 const os = require('os');
 const { login_user } = require('../creds');
@@ -9,9 +9,8 @@ const { login_user } = require('../creds');
 // app setup
 const app = express();
 const port = 3000;
-const networkInterfaces = os.networkInterfaces();
-const localIP = networkInterfaces['Ethernet'][1].address;
-const appUri = `http://${localIP}:${port}`;
+
+const appUri = `http://localhost:${port}`;
 let currentDate = new Date();
 
 let dateTime = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;

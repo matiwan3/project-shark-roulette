@@ -4,16 +4,28 @@ const spinningEffect = new Audio('../audio/spin.mp3');
 const winGreen = new Audio("../audio/win-green.mp3");
 
 // Initialize the game variables
-let balance = 1000;
+let balance = 1500;
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
 let highestWinPrice = 0;
 
-let session_username = prompt("Please enter your username:");
-if (!session_username) {
+
+let session_username;
+
+try {
+  session_username = prompt("Please enter your username:");
+  if (!session_username || !/^[a-zA-Z]+$/.test(session_username)) {
+    session_username = generateRandomUsername();
+  } else {
+    session_username = session_username.slice(0, 10);
+  }
+} catch (err) {
   session_username = generateRandomUsername();
+}
+finally {
+  console.log('Username is set to', session_username);
 }
 
 function generateRandomUsername() {
@@ -32,7 +44,7 @@ refreshBalance();
 
 const updateRanking = async (session_username, score) => {
   try {
-    const response = await fetch('http://192.168.1.16:3000/update-ranking', {
+    const response = await fetch('http://localhost:3000/update-ranking', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: session_username, score: score })
@@ -112,9 +124,7 @@ function chooseColor(color) {
 }
 
 function chooseBet(bet) {
-  console.log('balance', balance)
   if (balance == 0) {
-    console.log('reloading the page');
     location.reload();
   }
   if (bet > balance) {
@@ -154,7 +164,7 @@ function play() {
     alert('You do not have enough balance for this bet.');
     return;
   }
-  
+
   balance -= chosenBet;
   refreshBalance();
 
