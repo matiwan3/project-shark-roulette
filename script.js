@@ -1,9 +1,16 @@
+// Create an audio element for the sound effect
+const soundEffect = new Audio('../audio/cash-register-sound.mp3');
+const spinningEffect = new Audio('../audio/spin.mp3');
+const loseEffect = new Audio("../audio/losebet.mp3");
+
+// Initialize the game variables
 let balance = 1000;
 let chosenColor = null;
 let chosenBet = 0;
 let previousBet = 0;
 let highestBalance = 0;
 let highestWinPrice = 0;
+
 let session_username = prompt("Please enter your username:");
 if (!session_username) {
   session_username = generateRandomUsername();
@@ -23,10 +30,6 @@ const usernameElement = document.getElementById('username');
 usernameElement.innerHTML = `Playing as: <strong> ${session_username}</strong>`;
 refreshBalance();
 
-// Create an audio element for the sound effect
-const soundEffect = new Audio('audio/cash-register-sound.mp3');
-const spinningEffect = new Audio('audio/spin.mp3');
-const loseEffect = new Audio("audio/losebet.mp3");
 
 // Add the "Highest Balance" div to the game history
 const historyContainer = document.getElementById('historyContainer');
@@ -69,7 +72,7 @@ function buttonsDisabled(flag = true) {
   document.getElementById('btn-allin').disabled = flag;
   document.getElementById('btn-red').disabled = flag;
   document.getElementById('btn-black').disabled = flag;
-  document.getElementById('btn-green').disabled = flag;
+  document.getElementById('btn-red').disabled = flag;
 }
 function chooseColor(color) {
   chosenColor = color;
@@ -121,7 +124,11 @@ function play() {
     alert('Please choose a color.');
     return;
   }
-
+  if (chosenBet > balance) {
+    alert('You do not have enough balance for this bet.');
+    return;
+  }
+  
   balance -= chosenBet;
   refreshBalance();
 
