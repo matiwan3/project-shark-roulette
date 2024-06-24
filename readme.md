@@ -1,4 +1,4 @@
-# Version 3.1 Ranking extended up to 10 players
+# Version 3.1 Ranking extended up to 10 players (Server-Side)
 ![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/fd4bff7b-82a1-4c32-be44-b9816b002f9a)
 
 
