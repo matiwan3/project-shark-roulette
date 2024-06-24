@@ -1,4 +1,7 @@
-## Hosting [server-side version](https://github.com/matiwan3/project-shark-roulette/blob/feature/server-side/readme.md) on raspberryPi
+# Version 3.1 Ranking extended up to 10 players (Server-Side)
+![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/fd4bff7b-82a1-4c32-be44-b9816b002f9a)
+
+## Hosting [server-side version](https://github.com/matiwan3/project-shark-roulette/blob/feature/server-side/readme.md) on raspberryPi (Server-side)
 1. connect via ssh
 2. ```sudo apt install nodejs```  
 3. ```sudo apt install npm``` 
