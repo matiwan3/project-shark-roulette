@@ -1,7 +1,7 @@
 // Create an audio element for the sound effect
 const soundEffect = new Audio('../audio/cash-register-sound.mp3');
 const spinningEffect = new Audio('../audio/spin.mp3');
-const loseEffect = new Audio("../audio/losebet.mp3");
+const winGreen = new Audio("../audio/win-green.mp3");
 
 // Initialize the game variables
 let balance = 1000;
@@ -48,7 +48,7 @@ const updateRanking = async (session_username, score) => {
 
       rankElement.textContent = i + 1;
       usernameElement.innerHTML = rankings[i].name;
-      balanceElement.textContent = rankings[i].score;
+      balanceElement.textContent = rankings[i].score.toLocaleString();
     }
   } catch (err) {
     console.error('Error updating ranking:', err);
@@ -168,6 +168,7 @@ function play() {
     if (result.color === chosenColor) {
       if (chosenColor === 'green') {
         winAmount = chosenBet * 33;
+        winGreen.play();
       } else if (chosenColor === 'red') {
         winAmount = chosenBet * 2;
       } else {
@@ -185,7 +186,6 @@ function play() {
         document.getElementById('highestWinPrice').innerHTML = `Highest Win Price: <strong>$${highestWinPrice.toLocaleString()}</strong>`;
       }
     } else {
-      loseEffect.play();
       resultText += ' You lose!';
     }
 
