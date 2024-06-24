@@ -9,7 +9,7 @@
 5. npm -v  
    ![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/60947095-7b45-4d6c-8511-115ca775a316)
 
-7. cat > creds.js (add required values)  
+6. cat > creds.js (add required values)  
 ```
 const login= "loginValue";
 const pass = "passwordValue";
@@ -18,11 +18,18 @@ const login_user = "yourmongoDbString";
 
 module.exports = { login, pass, login_user };
 ```
-7. Run html local server on port 3000. navigate to index.html location and run:   
-```npm install http-server -g```
-```http-server index.html -p 3000 ```  
-???
+7. to init node_modules use  ```npm install```   
+8. Create a shell executable file to run the whole environment
+8.0 create a start-env.sh file 
+![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/f4b548b5-49a9-4268-a8ab-5cb28713c098)
 
+
+
+8.1 Kill the process if any running on port 5500
+```
+matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo kill -9 9584
+matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo lsof -i :5500
+```
 # Version 3.0
 Patch Notes: Added backend (server side), added mongoDB integration to keep the ranking up to date. **Unfortunately github pages can't host server side applications**, therefore you can only preview it [in this branch](https://github.com/matiwan3/project-shark-roulette/tree/feature/server-side)
 ![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/177f6e65-cb70-4ba9-bb2d-0602f82a049a)
