@@ -30,6 +30,15 @@ module.exports = { login, pass, login_user };
 matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo kill -9 9584
 matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo lsof -i :5500
 ```
+**Run index page (in index.html dir)**   
+```nohup sudo http-sesrver index.html -p 3000 > page.log >2&1 &```  
+**Run server-mongoDB.js using screen session (in server-mongoDB.js dir)**  
+``` screen -S my_node_server ```  
+``` ode server-MongoDB.js" ```  
+reattach  
+``` screen -r my_node_server ```  
+![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/7c40c4a7-e8b9-4ac7-8a28-a790109459ca)
+
 # Version 3.0
 Patch Notes: Added backend (server side), added mongoDB integration to keep the ranking up to date. **Unfortunately github pages can't host server side applications**, therefore you can only preview it [in this branch](https://github.com/matiwan3/project-shark-roulette/tree/feature/server-side)
 ![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/177f6e65-cb70-4ba9-bb2d-0602f82a049a)
