@@ -27,8 +27,10 @@ module.exports = { login, pass, login_user };
 
 8.1 Kill the process if any running on port 5500
 ```
-matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo kill -9 9584
-matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo lsof -i :5500
+python3 -m http.server 5500  
+matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo kill -9 9584  
+matiwan@raspberrypi:~/Desktop/project-shark-roulette $ sudo lsof -i :5500  
+python3 -m http.server 5500  
 ```
 **Run index page (in index.html dir)**   
 ```nohup sudo http-sesrver index.html -p 3000 > page.log >2&1 &```  
