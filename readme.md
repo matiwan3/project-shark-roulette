@@ -25,19 +25,21 @@ module.exports = { login, pass, login_user };
 
 
 
-8.1 Kill the process if any running on port 5500 / 3000
-**Kill the process**
-``` sudo kill -9 9584 ```  
-``` sudo lsof -i :5500 ```  
+8.1 Kill the process if any running on port 5500 / 3000  
+**Kill the process**  
+- ``` sudo kill -9 9584 ```    
+- ``` sudo lsof -i :5500 ```    
 
 **Run index page (in index.html dir)**   
-```nohup sudo http-sesrver index.html -p 3000 > page.log >2&1 &```  
+- ```nohup sudo http-sesrver index.html -p 3000 > page.log >2&1 &```  
+
 **Run server-mongoDB.js using screen session (in server-mongoDB.js dir)**  
 1. ``` screen -S db_server ```  
 2. ``` node server-MongoDB.js" ```    
 3. ``` Ctrl + A, then press D ```  
 4. ``` screen -r db_server ```  
-5, ``` screen -r my_node_server ```     
+5. ``` screen -r my_node_server ```
+   
 ![image](https://github.com/matiwan3/project-shark-roulette/assets/93386476/7c40c4a7-e8b9-4ac7-8a28-a790109459ca)
 
 # Version 3.0
